@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import com.example.myapplication.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -13,6 +14,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private lateinit var homeFragment: HomeFragment
     private lateinit var rankingFragment: RankingFragment
     private lateinit var profileFragment: ProfileFragment
+
+    private var activityMainBinding : ActivityMainBinding? = null
     
     companion object{
         const val TAG : String = "로그"
@@ -22,12 +25,16 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // view bainding
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        activityMainBinding = binding
+
         //레이아웃과 연결
-        setContentView(R.layout.activity_main)
+        setContentView(activityMainBinding!!.root)
         
         Log.d(TAG, "MainActivity - onCreate()")
         
-        bottom_nav.setOnNavigationItemSelectedListener(this)
+        activityMainBinding!!.bottomNav.setOnNavigationItemSelectedListener(this)
 
         //싱글턴 패턴
         homeFragment = HomeFragment.newInstance()
@@ -58,6 +65,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         when(item.itemId){
             R.id.menu_home ->{
+
+                activityMainBinding!!.mainActivityTextView.text = "홈 프레그먼트"
+
                 Log.d(TAG, "MainActivity - 홈버튼 클릭")
                 //싱글턴 패턴
                 homeFragment = HomeFragment.newInstance()
@@ -65,12 +75,18 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 supportFragmentManager.beginTransaction().replace(R.id.fragments_frame, homeFragment).commit()
             }
             R.id.menu_ranking ->{
+
+                activityMainBinding!!.mainActivityTextView.text = "랭킹 프레그먼트"
+
                 Log.d(TAG, "MainActivity - 랭킹버튼 클릭")
                 //싱글턴 패턴
                 rankingFragment = RankingFragment.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.fragments_frame, rankingFragment).commit()
             }
             R.id.menu_profile -> {
+
+                activityMainBinding!!.mainActivityTextView.text = "프로필 프레그먼트"
+
                 Log.d(TAG, "MainActivity - 프로필버튼 클릭")
                 //싱글턴 패턴
                 profileFragment = ProfileFragment.newInstance()

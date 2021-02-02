@@ -8,15 +8,25 @@
     tools:context=".MainActivity"
     android:background="#E8E3E3">
 
+    <TextView
+        android:id="@+id/main_activity_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="메인 액티비티"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="20dp"
+        />
+
     <FrameLayout
         android:id="@+id/fragments_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/bottom_nav"
+        android:layout_below="@+id/main_activity_text_view"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:background="#E8E3E3"
-    />
+        android:layout_marginTop="-18dp"
+        android:background="#E8E3E3" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
